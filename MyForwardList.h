@@ -29,6 +29,7 @@ struct MyNode {
 
 template<typename T>
 struct MyNodeIterator {
+// итератор по листу.
 private:
 	using data_type = T;
 public:
