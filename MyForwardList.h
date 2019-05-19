@@ -11,6 +11,7 @@
 
 template<typename T>
 struct MyNode {
+//узел
 	MyNode(const T &t) :
 			data(t), next(nullptr) {
 
