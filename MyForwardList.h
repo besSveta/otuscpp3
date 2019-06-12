@@ -11,7 +11,7 @@
 
 template<typename T>
 struct MyNode {
-//узел
+//узел для однонаправленного списка.
 	MyNode(const T &t) :
 			data(t), next(nullptr) {
 
@@ -23,7 +23,9 @@ struct MyNode {
 	}
 	~MyNode() = default;
 
+	// Ссылка на следующий элемент.
 	MyNode *next;
+	// Значение в узле.
 	T data;
 };
 
@@ -76,6 +78,7 @@ private:
 
 };
 
+// Однонаправленный список.
 template<typename T, typename Allocator = std::allocator<MyNode<T>>>
 
 struct MyForwardList {
@@ -102,7 +105,7 @@ struct MyForwardList {
 	MyForwardList(const allocator_type &alloc = allocator_type()) :_allocator(alloc) {
 		Init();
 	}
-
+	// вставка в конец списка.
 	void push_back(const data_type& value) {
 		insert();
 		tail->data = value;
@@ -168,7 +171,7 @@ private:
 		tail = head;
 		_size=0;
 	}
-
+// вызывается при вставке в конец списка.
 	void insert() {
 		if (head==nullptr && _size==0) {
 			head = _allocator.allocate(1);

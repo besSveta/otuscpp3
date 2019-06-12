@@ -8,14 +8,18 @@
 #pragma once
 #include <iostream>
 #include <memory>
+
+// I - для задания размера контейнера.
 template<typename T, int I>
 struct logging_allocator {
+	// Тип данных контейнера.
 	using value_type = T;
 	using pointer = T *;
 	using const_pointer = const T*;
 	using reference = T &;
 	using const_reference = const T&;
 	using size_type= std::size_t;
+	// для подсчета количества вызовов аллокатора.
 	int counter = 0;
 	T* allocated = NULL;
 
@@ -25,6 +29,7 @@ struct logging_allocator {
 	};
 
 	T *allocate(std::size_t n) {
+		// если заполнена вся выделенная память.
 		if (counter >= I) {
 			std::cout
 					<< "The size of the array can not be > " + std::to_string(I)
@@ -34,6 +39,7 @@ struct logging_allocator {
 		std::cout << __PRETTY_FUNCTION__ << "[n = " << n << "]" << std::endl;
 		//std::cout << __FUNCSIG__ << "[n = " << n << "]" << std::endl;
 		counter = counter + 1;
+		// первый вызов. Выделяем память под все I элементов.
 		if (counter == 1) {
 			if (I > 1 && n == 1)
 				n = n * I;
@@ -55,6 +61,7 @@ struct logging_allocator {
 				std::free(allocated);
 				allocated = NULL;
 			} else {
+				// Чтобы значть, есть ли еще элементы.
 				counter--;
 			}
 		} else
