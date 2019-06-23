@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(cmake VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(allocator VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 find_package(Threads REQUIRED)
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 add_executable(allocator allocator.cpp)
-add_library(listlib MyForwardList.cpp)
-add_library(alloclib MyAllocator.cpp)
+add_library(listlib SimpleForwardList.cpp)
+add_library(alloclib ListAllocator.cpp)
 add_executable(test_allocator allocator_test.cpp)
 
 set_target_properties(allocator listlib  alloclib test_allocator PROPERTIES
