@@ -18,11 +18,9 @@ public:
 
 	Node(const Node<T> &node) :
 			data(node.data), next(node.next) {
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
 
 	}
 	Node(T &&dt) :	data(std::forward<T>(dt)) {
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
 		next = nullptr;
 	}
 

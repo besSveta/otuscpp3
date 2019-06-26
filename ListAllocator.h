@@ -47,7 +47,7 @@ struct logging_allocator {
 					<< std::endl;
 			throw std::bad_alloc();
 		}
-		std::cout << __PRETTY_FUNCTION__ << "[n = " << n << "]" << std::endl;
+
 		counter = counter + 1;
 		// первый вызов. Выделяем память под все I элементов.
 		if (counter == 1) {
@@ -64,7 +64,6 @@ struct logging_allocator {
 
 	void deallocate(T *p, std::size_t n) {
 		destroy(p);
-		std::cout << __PRETTY_FUNCTION__ << "[n = " << n << "]" << std::endl;
 		if (I > 1) {
 			if (counter == 1) {
 				std::free(allocated);
@@ -80,12 +79,10 @@ struct logging_allocator {
 
 	template<typename U, typename ...Args>
 	void construct(U *p, Args &&...args) {
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
 	 new (p) U(std::forward<Args>(args)...);
 	}
 
 	void destroy(T *p) {
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
 		p->~T();
 	}
 	template<typename U, int J>
