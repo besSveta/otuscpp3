@@ -10,8 +10,8 @@ add_library(alloclib ListAllocator.cpp)
 add_executable(test_allocator allocator_test.cpp)
 
 set_target_properties(allocator listlib  alloclib test_allocator PROPERTIES
-	CXXSTANDARD 17
-	CSS_STANDARD_REQUIRED ON
+	CXX_STANDARD 17
+	CXX_STANDARD_REQUIRED ON
 	COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
 )
 
